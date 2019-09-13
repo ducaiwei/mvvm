@@ -1,9 +1,9 @@
 /**
  * 观察者
- * @param {object}} data 
+ * @param {object} data 
  */
 function Observer(data) {
-    debugger;
+    // debugger;
     this.data = data;
     this.walk(data);
 }
@@ -16,22 +16,22 @@ Observer.prototype = {
     },
     defineReactive: function(data, key, value) {
         var dep = new Dep();
+        var childObj = observe(value);
         Object.defineProperty(data, key, {
             enumerable: true,
             configurable: true,
-            get: function getter(value) {
-                // 在watcher实例化的时候才会添加订阅
+            get: function getter() {
                 if (Dep.target) {
                     dep.addSub(Dep.target);
                 }
                 return value;
             },
             set: function setter(newValue) {
-                if (newValue === value) {
+                if (value === newValue) {
                     return;
                 }
                 value = newValue;
-                dep.notify()
+                dep.notify();
             }
         });
     }
@@ -47,20 +47,3 @@ function observe(value) {
     }
     return new Observer(value);
 }
-/**
- * 订阅器
- */
-function Dep() {
-    this.subs = [];
-}
-Dep.prototype = {
-    addSub: function(sub) {
-        this.subs.push(sub);
-    },
-    notify: function() {
-        this.subs.forEach(function(sub) {
-            sub.update();
-        });
-    }
-}
-Dep.target = null;
