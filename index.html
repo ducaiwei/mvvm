@@ -8,14 +8,16 @@
 </head>
 <body>
     <div id="test"></div>
-    <script src="./dep.js?v=21"></script>
-    <script src="./observer.js?v=21"></script>
-    <script src="./watcher.js?v=21"></script>
-    <script src="./index.js?v=21"></script>
+    <script src="./dep.js"></script>
+    <script src="./observer.js"></script>
+    <script src="./watcher.js"></script>
+    <script src="./index.js"></script>
     <script>
-        var myMvvm = new MyMvvm({name: 'nelson'}, document.querySelector('#test'), 'name');
+        var arr = [1, 2, 3];
+        var myMvvm = new MyMvvm({name: arr}, document.querySelector('#test'), 'name');
         setTimeout(function() {
-            myMvvm.data.name = 'hello world';
+            arr.push(4);
+            // myMvvm.data.name = 'hello world';
         }, 2000)
     </script>
 </body>

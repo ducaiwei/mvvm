@@ -9,6 +9,7 @@ function MyMvvm(data, el, exp) {
     observe(data);
     el.innerHTML = this.data[exp];
     new Watcher(this, exp, function(value) {
+        console.log('value', value);
         el.innerHTML = value;
     });
     return this;

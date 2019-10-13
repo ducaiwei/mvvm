@@ -1,6 +1,6 @@
 /**
  * 订阅者
- * @param {}} vm 
+ * @param {} vm 
  * @param {*} exp 
  * @param {*} cb 
  */
@@ -23,9 +23,7 @@ Watcher.prototype = {
     run: function() {
         var value = this.vm.data[this.exp];
         var oldValue = this.value;
-        if (value !== oldValue) {
-            this.value = value;
-            this.cb.call(this.vm, value, oldValue);
-        }
+        this.value = value;
+        this.cb.call(this.vm, value, oldValue);
     }
 }
